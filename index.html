@@ -5,36 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>For You</title>
   <style>
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      font-family: 'Georgia', serif;
-      color: #f1f5f9;
+      font-family: Georgia, serif;
+      background: black;
+      overflow: hidden;
+      height: 100vh;
+      color: #f5f5f5;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      overflow: hidden;
-      background: black;
     }
 
-    /* Background image (black & white ocean couple) */
-    body::before {
-      content: "";
+    /* background image */
+    .bg {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
-      filter: grayscale(100%) brightness(40%);
-      z-index: -2;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      filter: grayscale(100%) brightness(35%);
+      z-index: -3;
     }
 
-    /* falling stars */
+    /* stars */
     .stars {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       overflow: hidden;
-      z-index: -1;
+      z-index: -2;
     }
 
     .star {
@@ -47,213 +46,152 @@
     }
 
     @keyframes fall {
-      from {
-        transform: translateY(-10px);
-        opacity: 1;
-      }
-      to {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
+      from { transform: translateY(-10px); opacity: 1; }
+      to { transform: translateY(100vh); opacity: 0; }
     }
 
-    .container {
+    .card {
+      width: min(700px, 90vw);
       text-align: center;
-      max-width: 700px;
-      padding: 20px;
+      padding: 30px;
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 2s ease;
+      transform: translateY(20px);
+      transition: 1.2s ease;
+      position: absolute;
     }
 
-    .show {
+    .active {
       opacity: 1;
       transform: translateY(0);
     }
 
     button {
-      margin-top: 30px;
-      padding: 10px 22px;
+      margin-top: 20px;
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: 1px solid white;
       background: transparent;
-      border: 1px solid #f1f5f9;
-      color: #f1f5f9;
+      color: white;
       cursor: pointer;
-      border-radius: 25px;
     }
 
-    .hidden {
-      display: none;
+    button:hover {
+      background: white;
+      color: black;
     }
 
     .final {
-      margin-top: 30px;
-      font-style: italic;
+      margin-top: 20px;
       opacity: 0;
-      transition: opacity 3s ease;
+      transition: 2s ease;
+      font-style: italic;
     }
 
     .final.show {
       opacity: 1;
     }
+
+    audio { display: none; }
   </style>
 </head>
 <body>
 
+<div class="bg"></div>
 <div class="stars" id="stars"></div>
 
-<!-- ✅ FIXED AUDIO -->
-<audio id="bgMusic" loop preload="auto">
-  <source src="music.mp3" type="audio/mpeg">
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg" />
 </audio>
 
-<div class="container" id="page1">
-  <h2>Dear Daddy Jelian,
+<!-- PAGE 1 -->
+<div class="card active" id="p1">
+  <h2>Dear Daddy Jelian,</h2>
+  <p>this is me, Mei Mei… your chaotic little girl who still misses you.</p>
+  <button onclick="start()">open</button>
+</div>
 
-this is me… your sweet, chaotic little girl
-who still misses you in ways she doesn’t always know how to explain,
-Mei Mei.
+<!-- PAGE 2 -->
+<div class="card" id="p2">
+  <p>I never knew how to say goodbye without feeling like I’m losing something I never had.</p>
+  <button onclick="next(2)">continue</button>
+</div>
 
+<!-- PAGE 3 -->
+<div class="card" id="p3">
+  <p>Somewhere between distance and silence… I fell for you softly, dangerously quiet.</p>
+  <button onclick="next(3)">continue</button>
+</div>
 
-I kept trying to find a way to say this
-without making it sound like I’m giving up on you—
-but the truth is…
-this isn’t me giving up.
+<!-- PAGE 4 -->
+<div class="card" id="p4">
+  <p>We didn’t end because we stopped caring… but because reality didn’t match what we felt.</p>
+  <button onclick="final()">last page</button>
+</div>
 
-this is me finally being honest with a feeling
-that grew quietly,
-gently,
-and a little too deeply.
+<!-- FINAL -->
+<div class="card" id="p5">
+  <h3>Wise men say… only fools rush in.</h3>
+  <p>but I couldn’t help falling in love with you.</p>
 
-
-somewhere between our late conversations,
-the distance that never felt real until it did,
-and all the almost moments we never got to finish—
-
-I fell for you.
-not loudly,
-not all at once,
-but in soft pieces…
-that somehow became everything.
-
-
-and that’s why this hurts the way it does.
-
-because nothing actually broke between us.
-no anger,
-no ending we could point at—
-just reality…
-slowly pulling us apart.
-
-
-I think a part of me will always wonder
-what we could’ve been
-if distance wasn’t this cruel,
-or if time had been a little kinder to us.
-
-
-I gave you that music box in a rush,
-but maybe that’s because
-some feelings don’t wait to be perfect.
-
-and if you ever listen to it,
-really listen—
-
-maybe you’ll hear the part of me
-that didn’t know how to stay quiet anymore:
-
-Wise men say… only fools rush in,
-but I couldn’t help
-falling in love with you.
-
-
-maybe in another life,
-I’ll find you again—
-a softer version of me,
-a closer version of you,
-and a world that finally lets us happen.
-
-
-but in this life…
-this is where I let you go.
-
-not because I stopped loving you,
-but because loving you from here
-is slowly breaking me in ways you can’t see.
-
-
-so I’ll carry you
-in the quiet parts of my days,
-in songs that suddenly feel heavier,
-and in the kind of memories
-that don’t ask to be forgotten.
-
-
-and this…
-this is my goodbye.
-
-for real,
-and for the last.
-
-
-please take care of yourself,
-for me… even if I’m no longer there to remind you.
+  <div class="final" id="finalText">
+    This is me letting you go…<br><br>
+    not because I stopped loving you,<br>
+    but because I finally understand<br>
+    some people are only meant to be felt, not kept.
+    <br><br>
+    goodbye… for real, and for the last.
   </div>
 </div>
 
 <script>
-  const music = document.getElementById('bgMusic');
+const music = document.getElementById('music');
 
-  window.onload = () => {
-    document.getElementById('page1').classList.add('show');
-
-    // generate stars
-    const starsContainer = document.getElementById('stars');
-    for (let i = 0; i < 50; i++) {
-      const star = document.createElement('div');
-      star.classList.add('star');
-      star.style.left = Math.random() * 100 + 'vw';
-      star.style.animationDuration = (3 + Math.random() * 5) + 's';
-      star.style.opacity = Math.random();
-      starsContainer.appendChild(star);
-    }
-  };
-
-  function startExperience() {
-    music.volume = 0;
-
-    music.play().then(() => {
-      let v = 0;
-      const fade = setInterval(() => {
-        if (v < 0.4) {
-          v += 0.02;
-          music.volume = v;
-        } else {
-          clearInterval(fade);
-        }
-      }, 200);
-    }).catch(err => {
-      console.log("Audio error:", err);
-    });
-
-    nextPage(1,2);
+function createStars() {
+  const container = document.getElementById('stars');
+  for (let i = 0; i < 60; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.animationDuration = (3 + Math.random() * 5) + 's';
+    s.style.opacity = Math.random();
+    container.appendChild(s);
   }
+}
 
-  function nextPage(current, next) {
-    const currentEl = document.getElementById(`page${current}`);
-    const nextEl = document.getElementById(`page${next}`);
+function show(id) {
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
 
-    currentEl.classList.remove('show');
+function start() {
+  music.volume = 0;
+  music.play().catch(()=>{});
 
-    setTimeout(() => {
-      currentEl.classList.add('hidden');
-      nextEl.classList.remove('hidden');
-      setTimeout(() => nextEl.classList.add('show'), 100);
-    }, 800);
-  }
+  let v = 0;
+  const fade = setInterval(() => {
+    if (v < 0.4) {
+      v += 0.02;
+      music.volume = v;
+    } else clearInterval(fade);
+  }, 200);
 
-  function showFinal() {
+  show('p2');
+}
+
+function next(n) {
+  show('p' + (n + 1));
+}
+
+function final() {
+  show('p5');
+  setTimeout(() => {
     document.getElementById('finalText').classList.add('show');
-  }
+  }, 800);
+}
+
+window.onload = () => {
+  createStars();
+};
 </script>
 
 </body>
